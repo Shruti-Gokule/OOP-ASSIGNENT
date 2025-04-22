@@ -1,3 +1,5 @@
+Assignment 18
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -32,3 +34,8 @@ int main() {
 
     return 0;
 }
+
+Output
+Student Name: Shruti
+Student Name: Gokule
+Student Name: Unknown
