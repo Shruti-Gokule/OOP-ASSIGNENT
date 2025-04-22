@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+public:
+    string title, author, publisher;
+    int price;
+    int stock;
+
+    Book(string t, string a, string pb, int p, int s) {
+        title = t;
+        author = a;
+        publisher = pb;
+        price = p;
+        stock = s;
+    }
+
+    void display() {
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "Publisher: " << publisher << endl;
+        cout << "Price: Rs. " << price << endl;
+        cout << "Stock: " << stock << endl;
+    }
+
+    bool IfItMatches(string t, string a) {
+        return (t == title && a == author);
+    }
+
+    void bookUWantToBuy(int copies) {
+        if (copies <= stock) {
+            cout << "Total Cost: Rs. " << price * copies << endl;
+        } else {
+            cout << "Not enough copies!!" << endl;
+        }
+    }
+};
+
+int main() {
+    Book b1("C++ Basics", "Shruti", "PCCOE", 299, 10);
+
+    string searchTitle, searchAuthor;
+    int copies;
+
+    cout << "Enter title of book: ";
+    getline(cin, searchTitle);
+    cout << "Enter author name: ";
+    getline(cin, searchAuthor);
+
+    if (b1.IfItMatches(searchTitle, searchAuthor)) {
+        cout << "Book Found!" << endl;
+        b1.display();
+
+        cout << "How many copies do you want? ";
+        cin >> copies;
+
+        b1.bookUWantToBuy(copies);
+
+    } else {
+        cout << "Book Not Available." << endl;
+    }
+
+    return 0;
+}
