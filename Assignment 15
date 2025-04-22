@@ -1,77 +1,57 @@
+Assignment 15
+
 #include <iostream>
-#include <string>
 using namespace std;
-
-int rollCounter = 1;
-
-class Marks {
-protected:
-    int rollNo;
-    string name;
-
+class Shape {
 public:
-    void BasicInformation() {
-        rollNo = rollCounter++;
-        cout << "Enter name: ";
-        cin >> name;
-    }
-
-    void showInformation() {
-        cout << "Roll No: " << rollNo << endl;
-        cout << "Name: " << name << endl;
+    void displayshape() {
+        cout << "This is a shape" << endl;
     }
 };
-
-class Physics : public Marks {
+class Polygon : public Shape {
 public:
-    int physics;
-
-    void getPhysicsMarks() {
-        cout << "Enter Physics marks: ";
-        cin >> physics;
+    void displayshape() {
+        cout << "Polygon is a shape" << endl;
     }
 };
-
-class Chemistry : public Marks {
+class Rectangle : public Polygon {
 public:
-    int chemistry;
-
-    void getChemistryMarks() {
-        cout << "Enter Chemistry marks: ";
-        cin >> chemistry;
+    void displayshape() {
+        cout << "Rectangle is a polygon" << endl;
     }
 };
-
-class Mathematics : public Marks {
+class Triangle : public Polygon {
 public:
-    int math;
-
-    void getMathMarks() {
-        cout << "Enter Mathematics marks: ";
-        cin >> math;
+    void displayshape() {
+        cout << "Triangle is a polygon" << endl;
     }
 };
-
+class Square : public Rectangle {
+public:
+    void displayshape() {
+        cout << "Square is a rectangle" << endl;
+    }
+};
 int main() {
-    Physics p;
-    Chemistry c;
-    Mathematics m;
-
-    p.BasicInformation();
-    p.getPhysicsMarks();
-    c.getChemistryMarks();
-    m.getMathMarks();
-
-    p.showInformation();
-    cout << "Physics: " << p.physics << endl; 
-    cout << "Chemistry: " << c.chemistry << endl;
-    cout << "Mathematics: " << m.math << endl;
-
-    int total = p.physics + c.chemistry + m.math;
-    cout << "Total: " << total << endl;
-
-    float average = total / 3.0f;
-    cout << "Average: " << average << endl;
+    Shape s;
+    Polygon p;
+    Rectangle r;
+    Triangle t;
+    Square squar;
+    
+    s.displayshape();
+    p.displayshape();
+    r.displayshape();
+    t.displayshape();
+    squar.displayshape();
 
     return 0;
 }
+
+Output:
+This is a shape
+Polygon is a shape
+Rectangle is a polygon
+Triangle is a polygon
+Square is a rectangle
+
