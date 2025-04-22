@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int rollCounter = 1;
+
+class Marks {
+protected:
+    int rollNo;
+    string name;
+
+public:
+    void BasicInformation() {
+        rollNo = rollCounter++;
+        cout << "Enter name: ";
+        cin >> name;
+    }
+
+    void showInformation() {
+        cout << "Roll No: " << rollNo << endl;
+        cout << "Name: " << name << endl;
+    }
+};
+
+class Physics : public Marks {
+public:
+    int physics;
+
+    void getPhysicsMarks() {
+        cout << "Enter Physics marks: ";
+        cin >> physics;
+    }
+};
+
+class Chemistry : public Marks {
+public:
+    int chemistry;
+
+    void getChemistryMarks() {
+        cout << "Enter Chemistry marks: ";
+        cin >> chemistry;
+    }
+};
+
+class Mathematics : public Marks {
+public:
+    int math;
+
+    void getMathMarks() {
+        cout << "Enter Mathematics marks: ";
+        cin >> math;
+    }
+};
+
+int main() {
+    Physics p;
+    Chemistry c;
+    Mathematics m;
+
+    p.BasicInformation();
+    p.getPhysicsMarks();
+    c.getChemistryMarks();
+    m.getMathMarks();
+
+    p.showInformation();
+    cout << "Physics: " << p.physics << endl; 
+    cout << "Chemistry: " << c.chemistry << endl;
+    cout << "Mathematics: " << m.math << endl;
+
+    int total = p.physics + c.chemistry + m.math;
+    cout << "Total: " << total << endl;
+
+    float average = total / 3.0f;
+    cout << "Average: " << average << endl;
+
+    return 0;
+}
