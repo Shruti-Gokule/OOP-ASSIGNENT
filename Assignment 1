@@ -1,0 +1,122 @@
+//  service charge is imposed. Create a class account that stores customer name, account number and type
+//  of account. From this derive the classes cur_acct and sav_acct to make them more specific to their
+//  requirements. Include necessary member functions in order to achieve the following tasks:
+//  (a) Accept the deposit from a customer and update the balance.
+//  (b) Display the balance.
+//  (c) Compute and deposit interest.
+//  (d) Permit withdrawal and update the balance.
+//  (e) Check for the minimum balance, impose penalty, necessary and update the balance.
+//  Do not use any constructors. Use member functions to initialize class members
+ 
+ 
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account {
+protected:
+    string name;
+    int accNo;
+    string accType;
+    float balance;
+
+public:
+    void input() {
+        cout << "Enter customer name: ";
+        cin >> name;
+        cout << "Enter account number: ";
+        cin >> accNo;
+        cout << "Enter initial balance: ";
+        cin >> balance;
+    }
+
+    void deposit() {
+        float amount;
+        cout << "Enter deposit amount: ";
+        cin >> amount;
+        balance += amount;
+        cout << "Deposit successful.\n";
+    }
+
+    void showBalance() {
+        cout << "Balance: Rs. " << balance << endl;
+    }
+};
+
+class SavingAccount : public Account {
+public:
+    void addInterest() {
+        float rate;
+        int time;
+        cout << "Interest rate (%): ";
+        cin >> rate;
+        cout << "Time (years): ";
+        cin >> time;
+        float interest = (balance * rate * time) / 100;
+        balance += interest;
+        cout << "Interest added: Rs. " << interest << endl;
+    }
+
+    void withdraw() {
+        float amount;
+        cout << "Withdraw amount: ";
+        cin >> amount;
+        if (amount <= balance) {
+            balance -= amount;
+            cout << "Withdrawal complete.\n";
+        } else {
+            cout << "Insufficient balance.\n";
+        }
+    }
+};
+
+
+class CurrentAccount : public Account {
+public:
+    void withdraw() {
+        float amount;
+        cout << "Withdraw amount: ";
+        cin >> amount;
+        if (amount <= balance) {
+            balance -= amount;
+            cout << "Withdrawal complete.\n";
+        } else {
+            cout << "Insufficient balance.\n";
+        }
+        checkMinimum();
+    }
+
+    void checkMinimum() {
+        if (balance < 1000) {
+            cout << "Below minimum balance. Penalty Rs. 100 charged.\n";
+            balance -= 100;
+        }
+    }
+};
+
+int main() {
+    SavingAccount sa;
+    CurrentAccount ca;
+
+    int choice;
+    cout << "Select account type:\n1. Saving\n2. Current\nChoice: ";
+    cin >> choice;
+
+    if (choice == 1) {
+        sa.input();
+        sa.deposit();
+        sa.addInterest();
+        sa.withdraw();
+        sa.showBalance();
+    } else if (choice == 2) {
+        ca.input();
+        ca.deposit();
+        ca.showBalance();
+        ca.withdraw();
+        ca.showBalance();
+    } else {
+        cout << "Invalid choice.\n";
+    }
+
+    return 0;
+}
